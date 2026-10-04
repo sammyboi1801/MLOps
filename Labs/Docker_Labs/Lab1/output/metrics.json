@@ -1,0 +1,20 @@
+{
+  "best_model": "logistic_regression",
+  "results": {
+    "logistic_regression": {
+      "accuracy": 0.9824561403508771,
+      "malignant_recall": 0.9761904761904762,
+      "roc_auc": 0.9953703703703703
+    },
+    "random_forest": {
+      "accuracy": 0.956140350877193,
+      "malignant_recall": 0.9285714285714286,
+      "roc_auc": 0.9937169312169312
+    },
+    "gradient_boosting": {
+      "accuracy": 0.956140350877193,
+      "malignant_recall": 0.9047619047619048,
+      "roc_auc": 0.9907407407407408
+    }
+  }
+}

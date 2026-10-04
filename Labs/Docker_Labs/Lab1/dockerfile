@@ -10,5 +10,9 @@ COPY src/ .
 # Install Scikit-Learn and joblib
 RUN pip install -r requirements.txt
 
+# Directory where the trained model and metrics are written (mount a volume here)
+ENV OUTPUT_DIR=/app/output
+VOLUME ["/app/output"]
+
 # Run the script when the container launches
 CMD ["python", "main.py"]
