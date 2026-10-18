@@ -1,0 +1,13 @@
+{
+  "best_model": "hist_gradient_boosting",
+  "results": {
+    "linear_regression": {
+      "rmse_dollars": 72900.58,
+      "r2": 0.6033
+    },
+    "hist_gradient_boosting": {
+      "rmse_dollars": 46041.49,
+      "r2": 0.8418
+    }
+  }
+}

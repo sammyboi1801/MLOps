@@ -1,17 +1,19 @@
 import numpy as np
-from sklearn.datasets import load_iris
+from sklearn.datasets import fetch_california_housing
 from sklearn.model_selection import train_test_split
 
 def load_data():
     """
-    Load the Iris dataset and return the features and target values.
+    Load the California Housing dataset and return the features and target values.
+    The dataset is downloaded the first time and cached locally after that.
     Returns:
-        X (numpy.ndarray): The features of the Iris dataset.
-        y (numpy.ndarray): The target values of the Iris dataset.
+        X (numpy.ndarray): The 8 features (MedInc, HouseAge, AveRooms, AveBedrms,
+            Population, AveOccup, Latitude, Longitude).
+        y (numpy.ndarray): Median house value in units of $100,000.
     """
-    iris = load_iris()
-    X = iris.data
-    y = iris.target
+    housing = fetch_california_housing()
+    X = housing.data
+    y = housing.target
     return X, y
 
 def split_data(X, y):

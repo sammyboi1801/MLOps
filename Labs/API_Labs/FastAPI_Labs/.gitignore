@@ -1,0 +1,2 @@
+# The root .gitignore ignores *.json, but keep the test scores used by /model-info
+!model/metrics.json
