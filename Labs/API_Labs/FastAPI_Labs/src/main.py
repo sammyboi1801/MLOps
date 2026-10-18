@@ -13,20 +13,8 @@ app = FastAPI(
 )
 
 class HouseData(BaseModel):
-    """
-    Pydantic BaseModel representing one California district.
-
-    Attributes:
-        median_income (float): Median income in $10,000s (8.3 means $83,000).
-        house_age (float): Median house age in years.
-        avg_rooms (float): Average number of rooms per household.
-        avg_bedrooms (float): Average number of bedrooms per household.
-        population (float): Number of people living in the district.
-        avg_occupancy (float): Average number of people per household.
-        latitude (float): Latitude, limited to California (32 to 42).
-        longitude (float): Longitude, limited to California (-125 to -114).
-    """
-    median_income: float = Field(gt=0, description="Median income in $10,000s")
+    """One California district. Each field's meaning and limits are in its description."""
+    median_income: float = Field(gt=0, description="Median income in $10,000s (8.3 means $83,000)")
     house_age: float = Field(ge=0, description="Median house age in years")
     avg_rooms: float = Field(gt=0, description="Average rooms per household")
     avg_bedrooms: float = Field(gt=0, description="Average bedrooms per household")
@@ -80,17 +68,9 @@ async def health_ping():
 async def predict_price(house: HouseData):
     """
     Predict the median house value for one district.
-    Example:
-        POST /predict
-        {
-            "median_income": 8.3252, "house_age": 41, "avg_rooms": 6.98, "avg_bedrooms": 1.02,
-            "population": 322, "avg_occupancy": 2.56, "latitude": 37.88, "longitude": -122.23
-        }
-        Response:
-        {
-            "predicted_price": <price in dollars>
-        }
-        The real median value for this district is $452,600.
+
+    Send the 8 features of a district and get back the predicted price in dollars.
+    The pre-filled example is a real district near Berkeley, its actual median value is $452,600.
     """
     try:
         prediction = predict_data([house.to_features()])

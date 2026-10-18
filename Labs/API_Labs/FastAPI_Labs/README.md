@@ -70,6 +70,8 @@ FastAPI_Labs/
     ```
 4. Open [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) to test the endpoints. The `/predict` endpoint already has an example filled in when you click "Try it out".
 
+![API docs page](assets/housing_docs.png)
+
 ## Endpoints
 
 | Method | Endpoint | What it does |
@@ -82,6 +84,8 @@ FastAPI_Labs/
 ### Example request for `/predict`
 
 This is a real district near Berkeley. Its actual median value is $452,600.
+
+![Predict request in /docs](assets/predict_request.png)
 
 ```json
 {
@@ -103,6 +107,8 @@ Response:
   "predicted_price": 412271.06
 }
 ```
+
+![Predict response in /docs](assets/predict_response.png)
 
 ### Example request for `/predict/batch`
 
@@ -136,6 +142,10 @@ These are some bad inputs I tested and the errors the API gave back (all 422):
 | `median_income: -1` | Input should be greater than 0 |
 | `population` left out | Field required |
 | empty `houses` list | List should have at least 1 item after validation, not 0 |
+
+This is what the error looks like in `/docs` when I sent `latitude: 45`. It says which field is wrong (`loc`), what the rule is (`le: 42`) and what I sent (`input: 45`):
+
+![Validation error for latitude 45](assets/validation_error.png)
 
 ## Results
 
