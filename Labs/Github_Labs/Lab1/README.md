@@ -27,6 +27,7 @@ Labs/
 │   ├── test/
 │   │   ├── test_pytest.py       # API tests
 │   │   └── test_unittest.py     # data, training and model tests
+│   ├── assets/                  # screenshots
 │   ├── requirements.txt         # uses the FastAPI lab requirements + pytest
 │   └── README.md
 └── API_Labs/FastAPI_Labs/       # the code being tested
@@ -96,6 +97,10 @@ python -m unittest test.test_unittest -v
 Locally all tests pass:
 - pytest: 17 passed (10 test functions, but the parametrized ones count each case separately)
 - unittest: 12 passed
+
+On GitHub Actions all 6 checks passed (2 workflows x 3 Python versions), each one took about 40 seconds:
+
+![All checks passed](assets/ci_checks_passed.png)
 
 ## What I learned
 
