@@ -1,0 +1,46 @@
+name: Lab1 API Tests (pytest)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Labs/Github_Labs/Lab1/**"
+      - "Labs/API_Labs/FastAPI_Labs/**"
+      - ".github/workflows/lab1_pytest.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    defaults:
+      run:
+        working-directory: Labs/Github_Labs/Lab1
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            Labs/Github_Labs/Lab1/requirements.txt
+            Labs/API_Labs/FastAPI_Labs/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run pytest
+        run: pytest test/test_pytest.py -v --junitxml=pytest-report.xml
+
+      - name: Upload test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-report-${{ matrix.python-version }}
+          path: Labs/Github_Labs/Lab1/pytest-report.xml

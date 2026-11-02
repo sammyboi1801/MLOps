@@ -1,0 +1,39 @@
+name: Lab1 Model Tests (unittest)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Labs/Github_Labs/Lab1/**"
+      - "Labs/API_Labs/FastAPI_Labs/**"
+      - ".github/workflows/lab1_unittest.yml"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+    defaults:
+      run:
+        working-directory: Labs/Github_Labs/Lab1
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: |
+            Labs/Github_Labs/Lab1/requirements.txt
+            Labs/API_Labs/FastAPI_Labs/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run unittests
+        run: python -m unittest test.test_unittest -v

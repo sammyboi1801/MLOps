@@ -1,1 +1,3 @@
-pytest 
+# same packages as the FastAPI lab
+-r ../../API_Labs/FastAPI_Labs/requirements.txt
+pytest==8.3.3
